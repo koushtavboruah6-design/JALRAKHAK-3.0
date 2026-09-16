@@ -1,0 +1,213 @@
+import { Zone } from '../types';
+
+export const MONITORING_ZONES: Zone[] = [
+  {
+    id: 'zone-assam-guwahati-metro',
+    name: 'Guwahati - Kamrup Hills & Bharalu Basin',
+    region: 'Kamrup Metropolitan, Assam',
+    country: 'India',
+    center: [26.182, 91.748],
+    polygon: [
+      [26.22, 91.70],
+      [26.21, 91.81],
+      [26.14, 91.80],
+      [26.13, 91.71],
+      [26.17, 91.68],
+    ],
+    slope: 32, // Steep urbanized hills (Narakasur, Kamakhya, Kharguli)
+    elevation: 65,
+    riverProximityKm: 0.2, // Brahmaputra south bank & Bharalu drainage
+    soilSaturationInitial: 74,
+    catchmentAreaKm2: 85.0,
+    population: 960000,
+    criticalInfrastructure: [
+      'Guwahati Medical College & Hospital',
+      'Paltan Bazar Inter-State Terminal',
+      'Saraighat Bridge Corridor',
+      'Bharalu Sluice & Pumping Station',
+    ],
+    geologyDescription: 'Precambrian granite gneiss hills mantled by thick red saprolitic clay; high risk of urban slope failure and flash drainage congestion.',
+  },
+  {
+    id: 'zone-assam-dima-hasao',
+    name: 'Haflong - Jatinga Valley Mountain Corridor',
+    region: 'Dima Hasao, Assam',
+    country: 'India',
+    center: [25.183, 93.024],
+    polygon: [
+      [25.24, 92.96],
+      [25.23, 93.08],
+      [25.12, 93.07],
+      [25.13, 92.95],
+    ],
+    slope: 39, // Barail Hill Range scarp
+    elevation: 680,
+    riverProximityKm: 0.35, // Jatinga river torrent canyon
+    soilSaturationInitial: 82,
+    catchmentAreaKm2: 68.4,
+    population: 42000,
+    criticalInfrastructure: [
+      'Lumding–Badarpur Hill Railway Section',
+      'NH-27 Mahur–Jatinga Highway Bypass',
+      'Haflong Civil Hospital',
+      'Barail Mountain Railway Tunnel #5',
+    ],
+    geologyDescription: 'Tertiary sandstones interbedded with fractured Disang shales and soft siltstones prone to massive rotational landslides and mudslides.',
+  },
+  {
+    id: 'zone-assam-majuli-island',
+    name: 'Majuli Island - Brahmaputra Riparian Plain',
+    region: 'Majuli District, Assam',
+    country: 'India',
+    center: [26.960, 94.215],
+    polygon: [
+      [27.03, 94.12],
+      [27.02, 94.34],
+      [26.89, 94.32],
+      [26.88, 94.14],
+    ],
+    slope: 2, // Completely flat alluvial island
+    elevation: 84,
+    riverProximityKm: 0.08, // Immediate braided channel bank
+    soilSaturationInitial: 86,
+    catchmentAreaKm2: 350.0,
+    population: 168000,
+    criticalInfrastructure: [
+      'Kamalabari Ghat Ferry Terminal',
+      'Garamur District Administrative Complex',
+      'Salmora Geo-Bag River Embankment',
+      'Auniati & Dakhinpat Satra Cultural Heritage Zone',
+    ],
+    geologyDescription: 'Quaternary active flood alluvium composed of unconsolidated fine sand and micaceous silt; extreme riverbank scouring and seasonal submergence.',
+  },
+  {
+    id: 'zone-assam-silchar-barak',
+    name: 'Silchar - Barak River & Bethukandi Catchment',
+    region: 'Cachar, Barak Valley, Assam',
+    country: 'India',
+    center: [24.833, 92.796],
+    polygon: [
+      [24.88, 92.73],
+      [24.87, 92.86],
+      [24.78, 92.85],
+      [24.79, 92.74],
+    ],
+    slope: 3, // Low-lying saucer floodplain
+    elevation: 25,
+    riverProximityKm: 0.12, // Barak dyke front
+    soilSaturationInitial: 88,
+    catchmentAreaKm2: 124.0,
+    population: 230000,
+    criticalInfrastructure: [
+      'Silchar Medical College Hospital',
+      'Bethukandi Dyke & Flood Protection Works',
+      'Tarapur Railway Junction',
+      'Barak River Water Treatment Plant',
+    ],
+    geologyDescription: 'Deep alluvial swampy clays with low natural infiltration; susceptible to prolonged backwater pooling when the Barak river overspills its banks.',
+  },
+  {
+    id: 'zone-assam-kaziranga-kaliabor',
+    name: 'Kaziranga - Kaliabor Floodplain Corridor',
+    region: 'Golaghat & Nagaon, Assam',
+    country: 'India',
+    center: [26.585, 93.170],
+    polygon: [
+      [26.65, 93.08],
+      [26.64, 93.28],
+      [26.52, 93.26],
+      [26.53, 93.07],
+    ],
+    slope: 5,
+    elevation: 67,
+    riverProximityKm: 0.3, // Brahmaputra overflow channels & Mora Diphlu
+    soilSaturationInitial: 78,
+    catchmentAreaKm2: 430.0,
+    population: 68000,
+    criticalInfrastructure: [
+      'NH-715 Elevated Animal Corridor Feeder',
+      'Kohora Forest Directorate Headquarters',
+      'Bokakhat Civil Emergency Center',
+      'Permanent Highland Wildlife Evacuation Mounds',
+    ],
+    geologyDescription: 'Recent riparian flood sediments and peat marshes transitioning into the granitic Karbi foothill fringes.',
+  },
+  {
+    id: 'zone-assam-karbi-anglong-diphu',
+    name: 'Karbi Anglong - Diphu & Dhansiri Escarpment',
+    region: 'Karbi Anglong, Assam',
+    country: 'India',
+    center: [25.842, 93.431],
+    polygon: [
+      [25.90, 93.36],
+      [25.89, 93.51],
+      [25.78, 93.49],
+      [25.79, 93.37],
+    ],
+    slope: 29, // Broken hill ridges
+    elevation: 320,
+    riverProximityKm: 0.55, // Dhansiri tributary creeks
+    soilSaturationInitial: 68,
+    catchmentAreaKm2: 110.0,
+    population: 85000,
+    criticalInfrastructure: [
+      'Diphu Medical College & Hospital',
+      'Manja–Diphu State Highway 3',
+      'Dhansiri Water Weir & Intake Station',
+      'Karbi Anglong Autonomous Council Complex',
+    ],
+    geologyDescription: 'Precambrian granitic gneiss plateau with heavily weathered lateritic mantles vulnerable to slope debris flows during intense monsoons.',
+  },
+  {
+    id: 'zone-assam-dibrugarh-rohmoria',
+    name: 'Dibrugarh - Rohmoria Brahmaputra Embankment',
+    region: 'Dibrugarh, Upper Assam',
+    country: 'India',
+    center: [27.480, 94.920],
+    polygon: [
+      [27.54, 94.84],
+      [27.53, 95.02],
+      [27.42, 95.00],
+      [27.43, 94.85],
+    ],
+    slope: 2,
+    elevation: 108,
+    riverProximityKm: 0.1, // Main Brahmaputra riverfront
+    soilSaturationInitial: 80,
+    catchmentAreaKm2: 180.0,
+    population: 185000,
+    criticalInfrastructure: [
+      'Dibrugarh Town Protection Dyke (DTPD)',
+      'Assam Medical College Hospital',
+      'Mohanbari Airport Access Highway',
+      'Rohmoria Spur Anti-Erosion Defenses',
+    ],
+    geologyDescription: 'Braided river sandbars and layered silt deposits subject to severe hydraulic eddy scouring and bank failure.',
+  },
+  {
+    id: 'zone-assam-bongaigaon-aie',
+    name: 'Bongaigaon - Manas & Aie River Alluvial Basin',
+    region: 'Bongaigaon & Chirang, Lower Assam',
+    country: 'India',
+    center: [26.502, 90.556],
+    polygon: [
+      [26.56, 90.48],
+      [26.55, 90.64],
+      [26.44, 90.62],
+      [26.45, 90.49],
+    ],
+    slope: 11,
+    elevation: 62,
+    riverProximityKm: 0.25, // Aie River active gravel torrent
+    soilSaturationInitial: 75,
+    catchmentAreaKm2: 215.0,
+    population: 140000,
+    criticalInfrastructure: [
+      'Bongaigaon Refinery & Petrochemicals (BGR)',
+      'New Bongaigaon Junction Railway Yard',
+      'NH-27 Aie River Multi-Span Bridge',
+      'Bijni Sub-Divisional Emergency Health Center',
+    ],
+    geologyDescription: 'Bhabar-terai boulder, gravel, and sandy alluvial fan deposit emerging from the Bhutan Himalayan foothills, generating flash river surges.',
+  },
+];

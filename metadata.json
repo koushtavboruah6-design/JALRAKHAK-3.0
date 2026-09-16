@@ -1,0 +1,7 @@
+{
+  "name": "HydroShield - Early Warning System",
+  "description": "Real-time rainfall, landslide risk, and flood early warning system for Assam, India with interactive GIS mapping, live Open-Meteo precipitation feeds, and terrain risk scoring.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

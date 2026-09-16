@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Nunito", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* Glassmorphism & Tactile Morphism Utilities */
+.glass-dock {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-color: rgba(231, 229, 228, 0.75);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(231, 229, 228, 0.75);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 6px 16px -4px rgba(0, 0, 0, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.glass-card-interactive {
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-card-interactive:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(249, 115, 22, 0.35);
+  box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.03), inset 0 1px 0 rgba(255, 255, 255, 1);
+  transform: translateY(-1px);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(231, 229, 228, 0.8);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.tactile-btn {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.15s ease-in-out;
+}
+.tactile-btn:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.tactile-inset {
+  box-shadow: inset 0 1.5px 3px rgba(0, 0, 0, 0.04), inset 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.glass-modal {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.12), 0 8px 16px -4px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+/* Leaflet Container & Popup Styling */
+.leaflet-container {
+  font-family: inherit;
+  background-color: #f5f5f4;
+}
+
+.custom-leaflet-popup .leaflet-popup-content-wrapper {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(231, 229, 228, 0.9);
+  box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.15), 0 4px 10px -2px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 1);
+  border-radius: 12px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.custom-leaflet-popup .leaflet-popup-content {
+  margin: 0;
+  line-height: inherit;
+}
+
+.custom-leaflet-popup .leaflet-popup-tip {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(231, 229, 228, 0.9);
+}
+
+/* Custom leaflet divIcon reset */
+.custom-leaflet-marker {
+  background: transparent;
+  border: none;
+}
+
+/* Subtle scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #d6d3d1;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a29e;
+}
