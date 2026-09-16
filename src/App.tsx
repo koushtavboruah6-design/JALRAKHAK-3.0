@@ -378,6 +378,9 @@ export default function App() {
                 userLocation={userCoords}
                 filterHazard={filterHazard}
                 onFilterChange={setFilterHazard}
+                onGoHome={() => setCurrentView('LANDING')}
+                onScanLocation={handleCheckMyArea}
+                isLocating={isLocating}
               />
             </main>
 

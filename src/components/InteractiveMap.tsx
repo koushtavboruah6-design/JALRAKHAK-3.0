@@ -18,6 +18,8 @@ import {
   X,
   Map as MapIcon,
   Flame,
+  Home,
+  LocateFixed,
 } from 'lucide-react';
 
 export type BaseLayerType = 'light' | 'terrain' | 'satellite';
@@ -79,6 +81,12 @@ interface InteractiveMapProps {
   userLocation: { lat: number; lng: number } | null;
   filterHazard: 'ALL' | 'HIGH_SEVERE' | 'LANDSLIDE' | 'FLOOD';
   onFilterChange: (filter: 'ALL' | 'HIGH_SEVERE' | 'LANDSLIDE' | 'FLOOD') => void;
+  /** Navigate back to the Landing Page */
+  onGoHome?: () => void;
+  /** Trigger geolocation scan (same as Check My Area) */
+  onScanLocation?: () => void;
+  /** Whether a location scan is currently in progress */
+  isLocating?: boolean;
 }
 
 // Coordinate safety validators to avoid Leaflet "Invalid LatLng object: (NaN, NaN)"
@@ -104,6 +112,9 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
   userLocation,
   filterHazard,
   onFilterChange,
+  onGoHome,
+  onScanLocation,
+  isLocating = false,
 }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
@@ -628,8 +639,68 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
       {/* Map DOM Canvas */}
       <div ref={mapContainerRef} className="absolute inset-0 w-full h-full z-0" style={{ minHeight: '480px' }} />
 
+      {/* ── Back to Home  &  My Location  ─ floating action row ── */}
+      {(onGoHome || onScanLocation) && (
+        <div className="absolute top-4 left-4 z-20 flex items-center gap-2">
+
+          {/* Back to Homepage */}
+          {onGoHome && (
+            <button
+              id="btn-map-go-home"
+              onClick={onGoHome}
+              title="Back to HydroShield homepage"
+              className="group flex items-center gap-2 px-3 py-2 rounded-xl
+                bg-stone-900/90 hover:bg-stone-950
+                text-white text-xs font-bold
+                border border-white/10 shadow-lg
+                transition-all duration-200
+                hover:shadow-orange-500/20 hover:shadow-xl
+                cursor-pointer backdrop-blur-sm"
+            >
+              <Home className="w-3.5 h-3.5 text-orange-400 group-hover:text-orange-300 transition-colors" />
+              <span className="hidden sm:inline">Back to Home</span>
+              <span className="sm:hidden">Home</span>
+            </button>
+          )}
+
+          {/* My Location */}
+          {onScanLocation && (
+            <button
+              id="btn-map-my-location"
+              onClick={onScanLocation}
+              disabled={isLocating}
+              title="Detect your GPS position & find the nearest hazard zone"
+              className={`group flex items-center gap-2 px-3 py-2 rounded-xl
+                text-xs font-bold border shadow-lg
+                transition-all duration-200 cursor-pointer backdrop-blur-sm
+                ${isLocating
+                  ? 'bg-orange-600/90 border-orange-400/40 text-white cursor-not-allowed shadow-orange-500/30'
+                  : 'bg-white/90 hover:bg-white border-white/60 text-stone-800 hover:shadow-orange-500/20 hover:shadow-xl'
+                }`}
+            >
+              {/* Pulsing ring while scanning */}
+              <span className="relative flex items-center justify-center w-3.5 h-3.5 shrink-0">
+                {isLocating && (
+                  <span className="absolute inline-flex w-full h-full rounded-full bg-orange-400 opacity-60 animate-ping" />
+                )}
+                <LocateFixed
+                  className={`w-3.5 h-3.5 relative ${
+                    isLocating
+                      ? 'text-white animate-spin'
+                      : 'text-orange-500 group-hover:text-orange-600 transition-colors'
+                  }`}
+                />
+              </span>
+              <span className="hidden sm:inline">{isLocating ? 'Scanning…' : 'My Location'}</span>
+              <span className="sm:hidden">{isLocating ? '…' : 'Locate'}</span>
+            </button>
+          )}
+        </div>
+      )}
+
       {/* Floating Map Controls & Filters */}
-      <div className="absolute top-4 left-4 z-10 flex flex-wrap items-center gap-1.5 glass-dock border border-white/70 p-1.5 rounded-xl shadow-md text-xs">
+      <div className={`absolute z-10 flex flex-wrap items-center gap-1.5 glass-dock border border-white/70 p-1.5 rounded-xl shadow-md text-xs ${(onGoHome || onScanLocation) ? 'top-16 left-4' : 'top-4 left-4'}`}>
+
         <span className="text-stone-700 font-bold px-2 uppercase text-[10px] tracking-wider">Layer View:</span>
         <button
           id="map-filter-all"
@@ -836,6 +907,66 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
                     className="w-4 h-4 rounded text-orange-600 focus:ring-orange-500 border-stone-300 accent-orange-600 cursor-pointer"
                   />
                 </label>
+              </div>
+
+              {/* Quick Actions Section */}
+              <div className="pt-2.5 border-t border-stone-200/70 space-y-2">
+                <span className="text-[10px] font-bold text-stone-500 uppercase tracking-wider block">
+                  Quick Actions
+                </span>
+
+                {/* Scan My Location Button */}
+                {onScanLocation && (
+                  <button
+                    id="btn-layer-scan-location"
+                    onClick={() => {
+                      onScanLocation();
+                      setIsLayerMenuOpen(false);
+                    }}
+                    disabled={isLocating}
+                    className={`w-full flex items-center gap-2.5 p-2.5 rounded-xl border text-xs font-semibold transition cursor-pointer ${
+                      isLocating
+                        ? 'border-orange-300 bg-orange-50/60 text-orange-400 cursor-not-allowed'
+                        : 'border-orange-400/60 bg-gradient-to-r from-orange-50 to-amber-50 text-orange-700 hover:border-orange-500 hover:from-orange-100 hover:to-amber-100 shadow-2xs'
+                    }`}
+                    title="Detect your current GPS position and find the nearest monitoring zone"
+                  >
+                    <div className="p-1.5 rounded-lg bg-orange-100 text-orange-600 shrink-0">
+                      <LocateFixed className={`w-3.5 h-3.5 ${isLocating ? 'animate-spin' : ''}`} />
+                    </div>
+                    <div className="text-left">
+                      <div className="font-bold text-stone-900">
+                        {isLocating ? 'Scanning...' : 'Scan My Location'}
+                      </div>
+                      <p className="text-[11px] text-stone-600 leading-tight font-normal">
+                        Detect GPS position &amp; check nearest hazard zone
+                      </p>
+                    </div>
+                  </button>
+                )}
+
+                {/* Back to Homepage Button */}
+                {onGoHome && (
+                  <button
+                    id="btn-layer-go-home"
+                    onClick={() => {
+                      onGoHome();
+                      setIsLayerMenuOpen(false);
+                    }}
+                    className="w-full flex items-center gap-2.5 p-2.5 rounded-xl border border-stone-200/80 bg-white/80 text-stone-700 hover:border-stone-400 hover:bg-stone-50 text-xs font-semibold transition cursor-pointer shadow-2xs"
+                    title="Return to the HydroShield landing page"
+                  >
+                    <div className="p-1.5 rounded-lg bg-stone-100 text-stone-600 shrink-0">
+                      <Home className="w-3.5 h-3.5" />
+                    </div>
+                    <div className="text-left">
+                      <div className="font-bold text-stone-900">Back to Homepage</div>
+                      <p className="text-[11px] text-stone-600 leading-tight font-normal">
+                        Return to the HydroShield landing page
+                      </p>
+                    </div>
+                  </button>
+                )}
               </div>
             </div>
           )}
